@@ -51,10 +51,10 @@ class Widget(QWidget):
         # dynamic_canvas.geometryChanged = None
         # gv.setLayout(dynamic_canvas)
 
-        self._dynamic_ax = self.dynamic_canvas.figure.subplots()
+        self._dynamic_ax = self.dynamic_canvas.figure.subplots(1, 2, squeeze=False)
         t = np.linspace(0, 10, 101)
         # Set up a Line2D.
-        self._line, = self._dynamic_ax.plot(t, np.sin(t + time.time()))
+        self._line, = self._dynamic_ax[0, 0].plot(t, np.sin(t + time.time()))
 
         
         # self._timer = dynamic_canvas.new_timer(50)
@@ -90,34 +90,14 @@ class Widget(QWidget):
     def _update_canvas(self):
         t = np.linspace(self.test, 10, 101)
         self.test += 1
-        # Shift the sinusoid as a function of time.
-        # self._line.set_data(t, np.sin(t + time.time()))
-        # self._line.figure.canvas.draw()
-        # self._line.figure.canvas.flush_events()
-        self._dynamic_ax.clear()
-        self._dynamic_ax.plot(t, np.sin(t + time.time()))
+        self._dynamic_ax[0, 0].clear()
+        self._dynamic_ax[0, 0].plot(t, np.sin(t + time.time()))
+        self._dynamic_ax[0, 1].clear()
+        self._dynamic_ax[0, 1].plot(t, np.sin(t + time.time()))
         self.test = (self.test + 1) % 2
-        self._dynamic_ax.autoscale()
+        self._dynamic_ax[0, 1].autoscale()
         self.dynamic_canvas.draw()
         self.dynamic_canvas.flush_events()
-
-        # self.rpv.remoteSceneChanged([1, 1, 1])
-        # self.rpv._view.renderView()
-        # self.rpv.scene().update()
-        # self.rpv._view.resize(QSize(480+self.test, 320))
-        
-        # self.rpv.resize(QSize(480+self.test, 320))
-        # self._qApp.processEvents()
-        # self.rpv._view.repaint()
-        # self.dynamic_canvas.update()
-        # self.rgv.prepareGeometryChange()
-        # self.rgv.informViewBoundsChanged()
-        # self.rgv.viewTransformChanged()
-
-        # self.rgv._resetCachedProperties()
-        # self.rgv.prepareGeometryChange()
-        # self.rgv.informViewBoundsChanged()
-        # self.rgv._updateView()
 
 if __name__=="__main__":
     app = QApplication(sys.argv)
