@@ -29,7 +29,7 @@ def print_test():
 class Widget(QWidget):
     def __init__(self, parent=None):
         super(Widget, self).__init__(parent)
-        self.rpv = MPLRemoteGraphicsView()
+        self.rpv = MPLRemoteGraphicsView.MPLRemoteGraphicsView()
         self.proc = self.rpv.remoteProcess()
     
         rwidgets = self.proc._import('PyQt5.QtWidgets')

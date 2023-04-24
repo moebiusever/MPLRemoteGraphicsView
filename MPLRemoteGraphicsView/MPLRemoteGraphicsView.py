@@ -158,7 +158,7 @@ class MPLRemoteGraphicsView(QtWidgets.QWidget):
         self._proc = mp.QtProcess(**kwds)
         self.pg = self._proc._import('pyqtgraph')
         self.pg.setConfigOptions(**CONFIG_OPTIONS)
-        rpgRemote = self._proc._import('MPLRemoteGraphicsView')
+        rpgRemote = self._proc._import('MPLRemoteGraphicsView.MPLRemoteGraphicsView')
         self._view = rpgRemote.Renderer(*args, **remoteKwds)
         self._view._setProxyOptions(deferGetattr=True)
         
