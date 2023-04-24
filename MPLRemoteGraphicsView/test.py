@@ -38,43 +38,21 @@ class Widget(QWidget):
         rmpl_figure = self.proc._import("matplotlib.figure")
         rmpl_qtagg = self.proc._import("matplotlib.backends.backend_qtagg")
         figure = rmpl_figure.Figure()
-        # figure.show()
+
         self.dynamic_canvas = rmpl_qtagg.FigureCanvas(figure)
         navbar = rmpl_qtagg.NavigationToolbar2QT(self.dynamic_canvas)
-        # dynamic_canvas.show()
-        # rbtn = rgui.QPushButton()
-
-        # gv = GraphicsView()
-        # gv.setCentralWidget(dynamic_canvas)
-        # gv = rpv.pg.GraphicsWidget()
-        # dynamic_canvas.zValue = 0
-        # dynamic_canvas.geometryChanged = None
-        # gv.setLayout(dynamic_canvas)
 
         self._dynamic_ax = self.dynamic_canvas.figure.subplots(1, 2, squeeze=False)
         t = np.linspace(0, 10, 101)
         # Set up a Line2D.
         self._line, = self._dynamic_ax[0, 0].plot(t, np.sin(t + time.time()))
 
-        
-        # self._timer = dynamic_canvas.new_timer(50)
-        # self._timer.add_callback(print_test)
-        # self._timer.start()
         self._timer = QTimer()
         self._timer.timeout.connect(self._update_canvas)
         self._timer.start(50)
 
         layout = QVBoxLayout()
-        # self.rgv = self.rpv.pg.GraphicsWidget()
-        # rgLayout = rwidgets.QGraphicsGridLayout()
-        # rscene = rwidgets.QGraphicsScene()
-        # # rgLayout.add
-        # self.rgi = rscene.addWidget(self.dynamic_canvas)
-        # rgLayout.addItem(self.rgi, 0, 0)
-        # rscene1 = rwidgets.QGraphicsScene()
-        # self.rgi1 = rscene.addWidget(navbar)
-        # rgLayout.addItem(self.rgi1, 1, 0)
-        # self.rgv.setLayout(rgLayout)
+
         self.test = 0
 
         # self.rpv.setCentralItem(self.rgv)
